@@ -1,4 +1,4 @@
-- 👋 Hi, I’m @sazid97
+- 👋 Hi, I’m Sazid Shovon
 - 👀 I’m interested in obtaining knowledge. 
 - 🌱 I’m currently learning coding.
 - 💞️ I’m looking to collaborate on python
