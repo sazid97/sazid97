@@ -47,7 +47,7 @@ def delete(root, data):
     return root
 
 def post_order(root):
-    return root.left + root.right + [root.value] if root else None
+    return post_order(root.left) + post_order(root.right) + [root.value] if root else None
 
 def draw_tree(root):
     def add_nodes_edges(dot, node):
