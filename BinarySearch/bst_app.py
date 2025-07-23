@@ -107,4 +107,4 @@ st.subheader("Tree Structure: ")
 tree_graph = draw_tree(st.session_state.bst_root)
 st.graphviz_chart(tree_graph)
 
-st.write("Author || Sazid Shovon)
+st.write("Author || Sazid Shovon")
