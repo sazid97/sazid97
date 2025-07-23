@@ -49,6 +49,10 @@ def delete(root, data):
 def post_order(root):
     return post_order(root.left) + post_order(root.right) + [root.value] if root else []
 
+
+def pre_order(root):
+    return [root.value] + pre_order(root.left) + pre_order(root.right) if root else []
+
 def draw_tree(root):
     def add_nodes_edges(dot, node):
         if node.left:
@@ -93,6 +97,10 @@ st.write(inorder_result if inorder_result else "tree is empty.")
 post_order = post_order(st.session_state.bst_root)
 st.subheader("Post order Traversal")
 st.write(post_order if post_order else "Tree Is empty")
+
+pre_order = pre_order(st.session_state.bst_root)
+st.subheader("Pre Order Traversal")
+st.write(pre_order if pre_order else "Tree is Empty")
 
 st.subheader("Tree Structure: ")
 tree_graph = draw_tree(st.session_state.bst_root)
