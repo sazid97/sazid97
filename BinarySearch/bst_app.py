@@ -72,6 +72,7 @@ def draw_tree(root):
 
 
 st.title("Binary Search Tree Visualizer !!!")
+
 if 'bst_root' not in st.session_state:
     st.session_state.bst_root = None
 with st.form("insert_form"):
@@ -105,3 +106,5 @@ st.write(pre_order if pre_order else "Tree is Empty")
 st.subheader("Tree Structure: ")
 tree_graph = draw_tree(st.session_state.bst_root)
 st.graphviz_chart(tree_graph)
+
+st.write("Author || Sazid Shovon)
