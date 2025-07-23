@@ -46,6 +46,8 @@ def delete(root, data):
         root.right = delete(root.right, temp)
     return root
 
+def post_order(root):
+    return root.left + root.right + [root.value] if root else None
 
 def draw_tree(root):
     def add_nodes_edges(dot, node):
@@ -87,6 +89,10 @@ if delete_button:
 inorder_result = print_order(st.session_state.bst_root)
 st.subheader("In - order Traversal")
 st.write(inorder_result if inorder_result else "tree is empty.")
+
+post_order = post_order(st.session.bst_root)
+st.subheader("Post order Traversal")
+st.write(post_order if post_order else "Tree Is empty")
 
 st.subheader("Tree Structure: ")
 tree_graph = draw_tree(st.session_state.bst_root)
