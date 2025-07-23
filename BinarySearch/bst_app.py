@@ -90,7 +90,7 @@ inorder_result = print_order(st.session_state.bst_root)
 st.subheader("In - order Traversal")
 st.write(inorder_result if inorder_result else "tree is empty.")
 
-post_order = post_order(st.session.bst_root)
+post_order = post_order(st.session_state.bst_root)
 st.subheader("Post order Traversal")
 st.write(post_order if post_order else "Tree Is empty")
 
