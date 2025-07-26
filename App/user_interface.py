@@ -4,7 +4,7 @@ import timm
 import torch
 from torchvision import transforms
 from PIL import Image
-
+import urllib.request
 st.title("Cats and Dogs Classification")
 uploaded_image = st.file_uploader("upload  image file to predict")
 
@@ -15,6 +15,9 @@ transform = transforms.Compose([transforms.Resize((224, 224)),
 
 def load_model():
     model_path = os.path.join(os.path.dirname(__file__), 'swin_model.pth')
+    if not os.path.exist(model_path):
+      url = 'https://drive.google.com/file/d/1hgHLGCkt_eWQhVYYqXGeVAzaqoPebmci/view?usp=drive_link
+      urllib.request.rtrieve(url, model_path)
     model = timm.create_model('swin_tiny_patch4_window7_224', pretrained=False, num_classes=2)
     state_dict = torch.load(model_path, map_location='cpu')
     model.load_state_dict(state_dict)
