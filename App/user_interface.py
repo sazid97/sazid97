@@ -14,8 +14,9 @@ transform = transforms.Compose([transforms.Resize((224, 224)),
 
 
 def load_model():
+    model_path = os.path.join(os.path.dirname(__file__), 'swin_model.pth')
     model = timm.create_model('swin_tiny_patch4_window7_224', pretrained=False, num_classes=2)
-    state_dict = torch.load('swin_model.pth', map_location='cpu')
+    state_dict = torch.load(model_path, map_location='cpu')
     model.load_state_dict(state_dict)
     model.eval()
     return model
