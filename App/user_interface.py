@@ -16,22 +16,36 @@ transform = transforms.Compose([transforms.Resize((224, 224)),
 
 
 def load_model():
+    import pickle
     model_path = os.path.join(os.path.dirname(__file__), 'swin_model.pth')
-    #file_id = "https://drive.google.com/file/d/1hgHLGCkt_eWQhVYYqXGeVAzaqoPebmci/view?usp=drive_link"
-    try:
-      if not os.path.exists(model_path):
-        url = 'https://drive.google.com/uc?id=1hgHLGCkt_eWQhVYYqXGeVAzaqoPebmci'
+    url = 'https://drive.google.com/uc?id=1hgHLGCkt_eWQhVYYqXGeVAzaqoPebmci'
+
+    def download_model():
+        if os.path.exists(model_path):
+            os.remove(model_path)
         gdown.download(url, model_path, quiet=False)
-    except (EOFError, RuntimeError, pickle.UnpicklingError):
-      print("Corrupted file")
-      if os.path.exists(model_path):
-          os.remove(model_path)
-      gdown.download(url, model_path, quiet=False)
-    model = timm.create_model('swin_tiny_patch4_window7_224', pretrained=False, num_classes=2)
-    state_dict = torch.load(model_path, map_location='cpu')
-    model.load_state_dict(state_dict)
-    model.eval()
-    return model
+
+    # Download if not present
+    if not os.path.exists(model_path) or os.path.getsize(model_path) < 100000:  # sanity check for <100KB files
+        st.warning("Downloading model file...")
+        download_model()
+
+    # Try loading model safely
+    try:
+        model = timm.create_model('swin_tiny_patch4_window7_224', pretrained=False, num_classes=2)
+        state_dict = torch.load(model_path, map_location='cpu')
+        model.load_state_dict(state_dict)
+        model.eval()
+        return model
+    except (EOFError, RuntimeError, pickle.UnpicklingError, torch.serialization.pickle.UnpicklingError):
+        st.error("Model file corrupted. Re-downloading...")
+        download_model()
+        state_dict = torch.load(model_path, map_location='cpu')
+        model = timm.create_model('swin_tiny_patch4_window7_224', pretrained=False, num_classes=2)
+        model.load_state_dict(state_dict)
+        model.eval()
+        return model
+
 
 model = load_model()
 if uploaded_image is not None:
