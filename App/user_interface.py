@@ -23,7 +23,7 @@ def load_model():
       url = 'https://drive.google.com/uc?id=1hgHLGCkt_eWQhVYYqXGeVAzaqoPebmci'
       gdown.download(url, model_path, quiet=False)
     except (EOFError, RuntimeError, pickle.UnpicklingError):
-      print("Corrupted file)
+      print("Corrupted file")
       if os.path.exists(model_path):
           os.remove(model_path)
       gdown.download(url, model_path, quiet=False)
