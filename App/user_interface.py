@@ -17,8 +17,15 @@ transform = transforms.Compose([transforms.Resize((224, 224)),
 
 def load_model():
     model_path = os.path.join(os.path.dirname(__file__), 'swin_model.pth')
-    if not os.path.exists(model_path):
+    #file_id = "https://drive.google.com/file/d/1hgHLGCkt_eWQhVYYqXGeVAzaqoPebmci/view?usp=drive_link"
+    try:
+      if not os.path.exists(model_path):
       url = 'https://drive.google.com/uc?id=1hgHLGCkt_eWQhVYYqXGeVAzaqoPebmci'
+      gdown.download(url, model_path, quiet=False)
+    except (EOFError, RuntimeError, pickle.UnpicklingError):
+      print("Corrupted file)
+      if os.path.exists(model_path):
+          os.remove(model_path)
       gdown.download(url, model_path, quiet=False)
     model = timm.create_model('swin_tiny_patch4_window7_224', pretrained=False, num_classes=2)
     state_dict = torch.load(model_path, map_location='cpu')
