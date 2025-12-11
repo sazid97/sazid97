@@ -2,6 +2,7 @@
 Master's graduate in Data Science with a passion for Artificial Intelligence, Machine Learning, and Computer Vision. I specialize in building intelligent systems that bridge cutting-edge AI research with real-world applications.
 
 🔬 What I'm Working On
+
 🧠 Deep learning architectures for medical imaging and computer vision
 🤖 Interactive AI systems and human-robot interaction
 📊 Data-driven modeling and predictive analytics
@@ -10,6 +11,7 @@ Master's graduate in Data Science with a passion for Artificial Intelligence, Ma
 💻 Technical Expertise
 
 Languages: Python, Java, SQL, PHP, Javascript
+
 ML/DL Frameworks: PyTorch, TensorFlow, Keras, scikit-learn
 Computer Vision: OpenCV, DeepFace, Swin Transformers, CNNs
 Tools & Platforms: Raspberry Pi, PyQt5, Git, Jupyter, Docker
